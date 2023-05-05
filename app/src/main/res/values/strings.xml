@@ -33,7 +33,7 @@
     <string name="content_default_5" translatable="false">Kiss</string>
     <string name="content_default_6" translatable="false">One chicken</string>
 
-    <string name="title_make_video_call">Make Video Call</string>
+    <string name="title_make_video_call">Make Voice Call</string>
     <string name="call_now">Call Now</string>
     <string name="call_type">Call type</string>
     <string name="incoming_call">Incoming call</string>
@@ -63,5 +63,9 @@
     <string name="refuse">REFUSE</string>
     <string name="answer">Answer</string>
 
+    <string name="outgoing_call_pictures">Outgoing call pictures</string>
+    <string name="change_picture">Change picture</string>
+    <string name="pick_up_the_phone_later">Pick up the phone later</string>
+    <string name="make_voice_call_title">Make Voice Call</string>
 
 </resources>

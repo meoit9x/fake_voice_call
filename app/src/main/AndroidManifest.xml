@@ -67,20 +67,20 @@
             android:exported="true"/>
 
         <activity
-            android:name=".ui.home.VideoCallAnswerActivity"
+            android:name=".ui.home.VideoCallActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
             android:showOnLockScreen="true" />
 
         <activity
-            android:name=".ui.home.OutCommingActivity"
+            android:name=".ui.home.VideoCallAnswerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.home.VideoCallActivity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:name=".ui.home.OutCommingActivity"
             android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

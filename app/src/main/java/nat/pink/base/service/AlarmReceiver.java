@@ -24,7 +24,6 @@ import java.util.Locale;
 import nat.pink.base.MainActivity;
 import nat.pink.base.R;
 import nat.pink.base.model.ObjectCalling;
-import nat.pink.base.ui.home.VideoCallActivity;
 import nat.pink.base.utils.Const;
 import nat.pink.base.utils.PreferenceUtil;
 
@@ -131,7 +130,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Will display the notification in the notification bar
         mNotificationManager.notify(1, builder.build());
     }
-
+/*
     private void buildNotification(Context context, ObjectCalling objectCalling) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
 
@@ -159,7 +158,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         notificationManager.createNotificationChannel(new NotificationChannel("my_call_app", "Call App", NotificationManager.IMPORTANCE_HIGH));
         notificationBuilder.setChannelId("my_call_app");
         notificationManager.notify(456789, notificationBuilder.build());
-    }
+    }*/
 }
 
 
