@@ -16,15 +16,14 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import nat.pink.base.databinding.ActivityMainBinding;
+import nat.pink.base.model.ObjectLocation;
 import nat.pink.base.ui.home.HomeFragment;
-
-import android.view.Menu;
-import android.view.MenuItem;
+import nat.pink.base.ui.tool.FragmentMain;
+import nat.pink.base.ui.tool.FragmentSplash;
+import nat.pink.base.utils.Const;
+import nat.pink.base.utils.PreferenceUtil;
 
 import java.util.ArrayList;
 
@@ -37,30 +36,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         fragmentManager = getSupportFragmentManager();
-
         initView();
         initData();
     }
 
     private void initData() {
-        TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-        if (tm.getNetworkCountryIso().toLowerCase().contains("v1n")) {
-            Intent intent = new Intent(this, ShowWebActivity.class);
-            startActivity(intent);
+        if (PreferenceUtil.getBoolean(this, Const.FIRST_APP, true)) {
+            addFragment(new FragmentSplash(), FragmentSplash.TAG);
+            return;
         }
+        ObjectLocation objectLocation = PreferenceUtil.getFirstApp(this);
+        if (objectLocation != null) {
+            if (objectLocation.getLct().equals("true")) {
+                replaceFragment(new FragmentMain(), FragmentMain.TAG);
+            } else {
+                replaceFragment(new HomeFragment(), HomeFragment.TAG);
+            }
+            return;
+        }
+        replaceFragment(new HomeFragment(), HomeFragment.TAG);
     }
 
     private void initView() {
-        addFragment(new HomeFragment(), HomeFragment.TAG);
-        binding.txtShowWeb.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ShowWebActivity.class);
-            startActivity(intent);
-        });
     }
 
     public void replaceFragment(Fragment fragment, String tag) {
@@ -84,10 +84,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (fragmentStates.size() > 1) {
+        if (fragmentStates.size() > 1 && !fragmentStates.get(fragmentStates.size() - 2).contains(FragmentSplash.TAG)) {
             getSupportFragmentManager().popBackStack(fragmentStates.get(fragmentStates.size() - 1), FragmentManager.POP_BACK_STACK_INCLUSIVE);
             fragmentStates.remove(fragmentStates.size() - 1);
-
             return;
         }
         finish();
